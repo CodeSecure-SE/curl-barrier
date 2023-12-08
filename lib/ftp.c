@@ -286,9 +286,11 @@ static CURLcode AcceptServerConnect(struct Curl_easy *data)
   /* Replace any filter on SECONDARY with one listening on this socket */
   result = Curl_conn_tcp_accepted_set(data, conn, SECONDARYSOCKET, &s);
   if(result)
+  {
     Curl_socket_close(data, conn, s);
     return result;
-
+  }
+  
   if(data->set.fsockopt) {
     int error = 0;
 
