@@ -741,7 +741,7 @@ static CURLcode mqtt_doing(struct Curl_easy *data, bool *done)
   struct connectdata *conn = data->conn;
   struct mqtt_conn *mqtt = &conn->proto.mqtt;
   struct MQTT *mq = data->req.p.mqtt;
-  ssize_t nread;
+  ssize_t nread = 0;
   unsigned char byte;
 
   *done = FALSE;

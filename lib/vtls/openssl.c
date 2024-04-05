@@ -2179,14 +2179,14 @@ CURLcode Curl_ossl_verifyhost(struct Curl_easy *data, struct connectdata *conn,
   hostlen = strlen(peer->hostname);
   switch(peer->type) {
   case CURL_SSL_PEER_IPV4:
-    if(!Curl_inet_pton(AF_INET, peer->hostname, &addr))
+    if(1 != Curl_inet_pton(AF_INET, peer->hostname, &addr))
       return CURLE_PEER_FAILED_VERIFICATION;
     target = GEN_IPADD;
     addrlen = sizeof(struct in_addr);
     break;
 #ifdef ENABLE_IPV6
   case CURL_SSL_PEER_IPV6:
-    if(!Curl_inet_pton(AF_INET6, peer->hostname, &addr))
+    if(1 != Curl_inet_pton(AF_INET6, peer->hostname, &addr))
       return CURLE_PEER_FAILED_VERIFICATION;
     target = GEN_IPADD;
     addrlen = sizeof(struct in6_addr);
