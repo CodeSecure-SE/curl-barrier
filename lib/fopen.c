@@ -101,11 +101,17 @@ CURLcode Curl_fopen(struct Curl_easy *data, const char *filename,
   int fd = -1;
   char *dir = NULL;
   *tempname = NULL;
+  int fn;
 
   *fh = fopen(filename, FOPEN_WRITETEXT);
-  if(!*fh)
+  if(!*fh )
     goto fail;
-  if(fstat(fileno(*fh), &sb) == -1 || !S_ISREG(sb.st_mode)) {
+
+  fn = fileno(*fh);
+  if (fn == -1)
+    goto fail;
+
+  if(fstat(fn, &sb) == -1 || !S_ISREG(sb.st_mode)) {
     return CURLE_OK;
   }
   fclose(*fh);
