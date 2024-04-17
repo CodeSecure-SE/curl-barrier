@@ -29,6 +29,14 @@
 
 #ifndef HAVE_BASENAME
 
+
+void doSomething()
+{
+  int p;
+
+  return 0;
+}
+
 char *tool_basename(char *path)
 {
   char *s1;
