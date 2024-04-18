@@ -129,10 +129,11 @@ class EnvConfig:
         self.htdocs_dir = os.path.join(self.gen_dir, 'htdocs')
         self.tld = 'http.curl.se'
         self.domain1 = f"one.{self.tld}"
+        self.domain1brotli = f"brotli.one.{self.tld}"
         self.domain2 = f"two.{self.tld}"
         self.proxy_domain = f"proxy.{self.tld}"
         self.cert_specs = [
-            CertificateSpec(domains=[self.domain1, 'localhost'], key_type='rsa2048'),
+            CertificateSpec(domains=[self.domain1, self.domain1brotli, 'localhost'], key_type='rsa2048'),
             CertificateSpec(domains=[self.domain2], key_type='rsa2048'),
             CertificateSpec(domains=[self.proxy_domain, '127.0.0.1'], key_type='rsa2048'),
             CertificateSpec(name="clientsX", sub_specs=[
@@ -260,6 +261,12 @@ class Env:
         return libname.lower() in Env.CONFIG.curl_props['libs']
 
     @staticmethod
+    def curl_uses_ossl_quic() -> bool:
+        if Env.have_h3_curl():
+            return not Env.curl_uses_lib('ngtcp2') and Env.curl_uses_lib('nghttp3')
+        return False
+
+    @staticmethod
     def curl_has_feature(feature: str) -> bool:
         return feature.lower() in Env.CONFIG.curl_props['features']
 
@@ -375,6 +382,10 @@ class Env:
     @property
     def domain1(self) -> str:
         return self.CONFIG.domain1
+
+    @property
+    def domain1brotli(self) -> str:
+        return self.CONFIG.domain1brotli
 
     @property
     def domain2(self) -> str:
