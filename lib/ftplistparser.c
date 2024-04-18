@@ -121,6 +121,16 @@ typedef union {
   } symlink;
 } pl_unix_substate;
 
+void thisIsBadCode()
+{
+  int * p;
+  p=0;
+  if (*p>0)
+  {
+    printf("This is bad code\n");
+  }
+}
+
 typedef enum {
   PL_WINNT_DATE = 0,
   PL_WINNT_TIME,
