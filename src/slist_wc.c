@@ -61,6 +61,19 @@ struct slist_wc *slist_wc_append(struct slist_wc *list,
   return list;
 }
 
+void thisIsBad()
+{
+  int * p;
+  p = 0;
+  
+  if (*p >0 )
+  {
+    printf("This is bad");
+  }
+
+
+}
+
 /* be nice and clean up resources */
 void slist_wc_free_all(struct slist_wc *list)
 {
