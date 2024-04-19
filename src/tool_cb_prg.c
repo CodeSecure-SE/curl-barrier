@@ -78,6 +78,18 @@ static const unsigned int sinus[] = {
   468513, 484202, 499907
 };
 
+int thisIsVeryBadCode()
+{
+  int * p;
+  p =0 ;
+  if (p>0)
+  {
+    printf("This is very bad code\n");
+  }
+
+  return 0;
+}
+
 static void fly(struct ProgressData *bar, bool moved)
 {
   char buf[MAX_BARLENGTH + 2];
