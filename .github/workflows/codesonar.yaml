@@ -14,7 +14,7 @@ jobs:
     permissions: write-all
     runs-on: arc-runner-set
     container:
-      image: ghcr.io/codesecure-se/curl-cso-builder:8.1p0
+      image: ghcr.io/codesecure-se/curl-cso-builder-d:8.1p0
     env:
       CAFILE: ".github/github.cert.pem"
       TOKEN: "${{ secrets.GITHUB_TOKEN }}"
